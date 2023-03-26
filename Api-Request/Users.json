@@ -1,0 +1,209 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "Api/Users",
+    "dateExported": "2023-03-26T17:38:13.992Z",
+    "version": "1.1",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "a56b993b-18ec-4f6c-8bd0-9915b9802754",
+            "colId": "7c19f4aa-c215-4c6c-8fd8-2ab0c51ac49f",
+            "containerId": "",
+            "name": "GetAllUsers",
+            "url": "localhost:8000/api/users",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2023-03-26T16:43:23.908Z",
+            "modified": "2023-03-26T17:34:06.821Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "application/json"
+                }
+            ],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "eb386635-84fe-41de-9125-f50607816494",
+            "colId": "7c19f4aa-c215-4c6c-8fd8-2ab0c51ac49f",
+            "containerId": "",
+            "name": "GetOneUser ",
+            "url": "localhost:8000/api/users/16",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2023-03-26T16:43:32.285Z",
+            "modified": "2023-03-26T17:34:32.267Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "application/json"
+                }
+            ],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "1f83175d-b9d0-46fe-b5b4-e8e972c526eb",
+            "colId": "7c19f4aa-c215-4c6c-8fd8-2ab0c51ac49f",
+            "containerId": "",
+            "name": "AddUser",
+            "url": "localhost:8000/api/users",
+            "method": "POST",
+            "sortNum": 22500,
+            "created": "2023-03-26T17:02:45.599Z",
+            "modified": "2023-03-26T17:35:08.249Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "application/json"
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "formdata",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "first_name",
+                        "value": "test"
+                    },
+                    {
+                        "name": "last_name",
+                        "value": "test"
+                    },
+                    {
+                        "name": "username",
+                        "value": "test"
+                    },
+                    {
+                        "name": "email",
+                        "value": "test@p.com"
+                    },
+                    {
+                        "name": "password",
+                        "value": "holako123"
+                    },
+                    {
+                        "name": "password_confirmation",
+                        "value": "holako123"
+                    },
+                    {
+                        "name": "role_id",
+                        "value": "1"
+                    }
+                ]
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "3fd12291-7257-47b6-98a9-fad58b0a3bec",
+            "colId": "7c19f4aa-c215-4c6c-8fd8-2ab0c51ac49f",
+            "containerId": "",
+            "name": "UpdateUser",
+            "url": "localhost:8000/api/users/18",
+            "method": "PUT",
+            "sortNum": 23750,
+            "created": "2023-03-26T17:06:21.279Z",
+            "modified": "2023-03-26T17:35:33.726Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "application/json"
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"username\": \"test2\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "c54dd043-925d-4bba-a298-a00aa5677772",
+            "colId": "7c19f4aa-c215-4c6c-8fd8-2ab0c51ac49f",
+            "containerId": "",
+            "name": "RestoreUser",
+            "url": "localhost:8000/api/user/18/restore",
+            "method": "POST",
+            "sortNum": 25000,
+            "created": "2023-03-26T16:49:21.127Z",
+            "modified": "2023-03-26T17:36:07.073Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "application/json"
+                }
+            ],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "2f5f1b25-459d-49e3-8785-c0febc280d0d",
+            "colId": "7c19f4aa-c215-4c6c-8fd8-2ab0c51ac49f",
+            "containerId": "",
+            "name": "DeleteUser [soft]",
+            "url": "localhost:8000/api/users/18",
+            "method": "DELETE",
+            "sortNum": 30000,
+            "created": "2023-03-26T16:48:07.547Z",
+            "modified": "2023-03-26T17:35:51.761Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "application/json"
+                }
+            ],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "250d9553-e1b4-476d-ba47-1da352b5d92e",
+            "colId": "7c19f4aa-c215-4c6c-8fd8-2ab0c51ac49f",
+            "containerId": "",
+            "name": "DeleteUser [Harde]",
+            "url": "localhost:8000/api/user/18/force_delete",
+            "method": "DELETE",
+            "sortNum": 40000,
+            "created": "2023-03-26T16:49:01.369Z",
+            "modified": "2023-03-26T17:36:27.786Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "application/json"
+                }
+            ],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": []
+        }
+    ]
+}
