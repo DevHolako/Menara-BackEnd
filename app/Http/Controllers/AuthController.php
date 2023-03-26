@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\MailNotfy;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class AuthController extends Controller
 {
@@ -47,6 +49,11 @@ class AuthController extends Controller
         } else {
 
             $fullname = $user->first_name . " " . $user->last_name;
+            $login_time = now();
+            $clientIP = $req->ip();
+
+            Mail::to($user->email)->send(new MailNotfy($fullname, $login_time, $clientIP));
+
             $token = $user->createToken(env("TOKEN_SALT"))->plainTextToken;
             return response([
                 "message" => "Wellcome back $fullname",
