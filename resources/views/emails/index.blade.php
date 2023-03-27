@@ -6,18 +6,7 @@
 <meta name="x-apple-disable-message-reformatting">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta content="telephone=no" name="format-detection">
-<title>New message</title><!--[if (mso 16)]>
-<style type="text/css">
-a {text-decoration: none;}
-</style>
-<![endif]--><!--[if gte mso 9]><style>sup { font-size: 100% !important; }</style><![endif]--><!--[if gte mso 9]>
-<xml>
-<o:OfficeDocumentSettings>
-<o:AllowPNG></o:AllowPNG>
-<o:PixelsPerInch>96</o:PixelsPerInch>
-</o:OfficeDocumentSettings>
-</xml>
-<![endif]--><!--[if !mso]><!-- -->
+<title>New message</title>
 <link href="https://fonts.googleapis.com/css2?family=Imprima&display=swap" rel="stylesheet"><!--<![endif]-->
 <style type="text/css">
 #outlook a {
@@ -48,11 +37,7 @@ mso-hide:all;
 </style>
 </head>
 <body style="width:100%;font-family:arial, 'helvetica neue', helvetica, sans-serif;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;padding:0;Margin:0">
-<div class="es-wrapper-color" style="background-color:#FFFFFF"><!--[if gte mso 9]>
-<v:background xmlns:v="urn:schemas-microsoft-com:vml" fill="t">
-<v:fill type="tile" color="#ffffff"></v:fill>
-</v:background>
-<![endif]-->
+<div class="es-wrapper-color" style="background-color:#FFFFFF">
 <table class="es-wrapper" width="100%" cellspacing="0" cellpadding="0" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;padding:0;Margin:0;width:100%;height:100%;background-repeat:repeat;background-position:center top;background-color:#FFFFFF">
 <tr>
 <td valign="top" style="padding:0;Margin:0">
