@@ -19,6 +19,20 @@ use Illuminate\Support\Facades\Route;
 Route::post("/register", [AuthController::class, "register"]);
 Route::post("/login", [AuthController::class, "login"]);
 
+## Password Reset ##
+#send email##
+Route::post("/forgot-password", [AuthController::class, "resetPassword"]);
+#change password#
+Route::post('/reset-password', [AuthController::class, "handleResetPassword"]);
+
+#render form ##
+Route::get('reset-password/{token}', function ($token) {
+})->name('password.reset');
+
+// Route::get('/reset-password/{token}', function ($token) {
+//     return view('auth.reset-password', ['token' => $token]);
+// });
+
 // Protected Routes
 Route::group(['middleware' => ['auth:sanctum']], function () {
 
