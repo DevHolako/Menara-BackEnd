@@ -1,6 +1,9 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\PermissionController;
+use App\Http\Controllers\Api\RoleController;
+use App\Http\Controllers\Api\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,8 +15,40 @@ use Illuminate\Support\Facades\Route;
 | routes are loaded by the RouteServiceProvider and all of them will
 | be assigned to the "api" middleware group. Make something great!
 |
-*/
+ */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+// ------------ Public Routes ------------ //
+
+Route::post("/register", [AuthController::class, "register"]);
+Route::post("/login", [AuthController::class, "login"]);
+
+# ------ Password Routes ------ #
+#send link
+Route::post("/forgot-password", [AuthController::class, "resetPassword"]);
+#change password
+Route::post('/reset-password', [AuthController::class, "handleResetPassword"]);
+#render form
+Route::get('reset-password/{token}', function ($token) {
+})->name('password.reset');
+
+// ------------ Protected Routes ------------ //
+
+Route::group(['middleware' => ['auth:sanctum']], function () {
+
+    // User-related routes
+    Route::post('/user/{user}/restore', [UserController::class, 'restore']);
+    Route::delete('/user/{user}/force_delete', [UserController::class, 'forceDelete']);
+    Route::apiResource('users', UserController::class)->middleware(['role:Owner|admin']);
+
+    // Auth-related routes
+    Route::post("/logout", [AuthController::class, "logout"]);
+
+    //
+    Route::middleware(['role:Owner|admin'])->group(function () {
+        Route::apiResource('/permissions', PermissionController::class);
+        Route::apiResource('/roles', RoleController::class);
+        Route::post('/roles/{role}/permissions', [RoleController::class, 'GivePermission']);
+
+    });
+
 });
