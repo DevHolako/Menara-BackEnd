@@ -19,6 +19,22 @@ class UserSeeder extends Seeder
             "email" => "holako@p.com",
             "password" => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
 
-        ])->assignRole('admin');
+        ])->assignRole('Owner');
+        User::create([
+            "first_name" => "admin",
+            "last_name" => "",
+            "username" => "admin",
+            "email" => "admin@p.com",
+            "password" => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+
+        ])->assignRole('Admin');
+        User::create([
+            "first_name" => "Test",
+            "last_name" => "User",
+            "username" => "user",
+            "email" => "user@p.com",
+            "password" => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+
+        ])->assignRole('User');
     }
 }
