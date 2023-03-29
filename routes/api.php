@@ -38,17 +38,22 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     // User-related routes
     Route::post('/user/{user}/restore', [UserController::class, 'restore']);
     Route::delete('/user/{user}/force_delete', [UserController::class, 'forceDelete']);
-    Route::apiResource('users', UserController::class)->middleware(['role:Owner|admin']);
 
     // Auth-related routes
     Route::post("/logout", [AuthController::class, "logout"]);
 
     //
-    Route::middleware(['role:Owner|admin'])->group(function () {
+    Route::middleware(['role:Owner|Admin'])->group(function () {
+        Route::apiResource('users', UserController::class);
         Route::apiResource('/permissions', PermissionController::class);
         Route::apiResource('/roles', RoleController::class);
         Route::post('/roles/{role}/permissions', [RoleController::class, 'GivePermission']);
+        Route::delete('/roles/{role}/permissions', [RoleController::class, 'RevokePermission']);
 
     });
+
+    Route::get('/test', function () {
+        return "hey from test";
+    })->middleware(['permission:test']);
 
 });

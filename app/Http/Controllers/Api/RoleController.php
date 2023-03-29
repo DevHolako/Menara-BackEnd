@@ -93,15 +93,30 @@ class RoleController extends Controller
         }
         $validated = $request->validate(['name' => 'string|required|exists:permissions,name']);
 
-        $check = $role->hasPermissionTo($validated['name']);
+        if ($role->hasPermissionTo($validated['name'])) {
+            return response()->json(['message' => 'Permission has already been granted in that role'], 403);
+        }
 
-        return $check;
+        $role->givePermissionTo($validated['name']);
+        return response()->json(['message' => 'Permission has been granted'], 200);
 
-        //     if ($role->hasPermissionTo($validated['name'], "api")) {
-        //         return response()->json(['message' => 'Permission has already been granted in that role'], 403);
-        //     }
+    }
+    public function RevokePermission(Request $request, string $id)
+    {
 
-        //     $role->givePermissionTo($validated['name']);
-        //
+        $validated = $request->validate(['name' => 'string|required|exists:permissions,name']);
+
+        $role = Role::find($id);
+
+        if (!$role) {
+            return response()->json(['message' => 'Role not found'], 404);
+        }
+
+        if (!$role->hasPermissionTo($validated['name'])) {
+            return response()->json(['message' => 'Permission are not granted to this role'], 403);
+        }
+        $role->revokePermissionTo($validated['name']);
+        return response()->json(['message' => 'Permission has been reovked'], 200);
+
     }
 }
