@@ -18,6 +18,9 @@ use Illuminate\Support\Facades\Route;
  */
 
 // ------------ Public Routes ------------ //
+Route::get('/', function () {
+    return "hey from api";
+});
 
 Route::post("/register", [AuthController::class, "register"]);
 Route::post("/login", [AuthController::class, "login"]);
@@ -51,9 +54,5 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::delete('/roles/{role}/permissions', [RoleController::class, 'RevokePermission']);
 
     });
-
-    Route::get('/test', function () {
-        return "hey from test";
-    })->middleware(['permission:test']);
 
 });

@@ -17,4 +17,12 @@ Route::get('/', function () {
     return ['Laravel' => app()->version()];
 });
 
+Route::get('/clear-cache', function () {
+    Artisan::call('cache:clear');
+    Artisan::call('view:clear');
+    Artisan::call('config:cache');
+    Artisan::call('route:cache');
+    return 'Application cache has been cleared';
+});
+
 require __DIR__ . '/auth.php';
