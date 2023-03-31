@@ -18,6 +18,9 @@ use Illuminate\Support\Facades\Route;
  */
 
 // ------------ Public Routes ------------ //
+Route::get('/', function () {
+    return "hey from api";
+});
 
 Route::post("/register", [AuthController::class, "register"]);
 Route::post("/login", [AuthController::class, "login"]);
@@ -35,25 +38,21 @@ Route::get('reset-password/{token}', function ($token) {
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
 
-    // User-related routes
-    Route::post('/user/{user}/restore', [UserController::class, 'restore']);
-    Route::delete('/user/{user}/force_delete', [UserController::class, 'forceDelete']);
-
     // Auth-related routes
     Route::post("/logout", [AuthController::class, "logout"]);
-
-    //
+    // Admin Routes
     Route::middleware(['role:Owner|Admin'])->group(function () {
+        // User-related routes
+        Route::post('/user/{user}/restore', [UserController::class, 'restore']);
+        Route::delete('/user/{user}/force_delete', [UserController::class, 'forceDelete']);
         Route::apiResource('users', UserController::class);
+
+        // roles and permes routes
         Route::apiResource('/permissions', PermissionController::class);
         Route::apiResource('/roles', RoleController::class);
         Route::post('/roles/{role}/permissions', [RoleController::class, 'GivePermission']);
         Route::delete('/roles/{role}/permissions', [RoleController::class, 'RevokePermission']);
 
     });
-
-    Route::get('/test', function () {
-        return "hey from test";
-    })->middleware(['permission:test']);
 
 });

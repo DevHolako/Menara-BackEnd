@@ -56,10 +56,10 @@ class AuthController extends Controller
 
             Mail::to($user->email)->send(new MailNotfy($fullname, $login_time, $clientIP));
 
-            $token = $user->createToken(env("TOKEN_SALT"))->plainTextToken;
+            $token = $user->createToken($user->username)->plainTextToken;
             return response([
                 "message" => "Wellcome back $fullname",
-                "token" => "this is your new token : $token",
+                "token" => "$token",
             ], 201);
         }
 
