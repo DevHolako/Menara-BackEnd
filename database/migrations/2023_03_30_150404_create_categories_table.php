@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string("code")->unique()->default('CAT');
             $table->string("intitule")->unique();
+            $table->softDeletes();
+
             $table->timestamps();
         });
     }
