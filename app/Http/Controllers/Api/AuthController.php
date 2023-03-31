@@ -54,9 +54,9 @@ class AuthController extends Controller
             $login_time = now();
             $clientIP = $req->ip();
 
-            Mail::to($user->email)->send(new MailNotfy($fullname, $login_time, $clientIP));
+        // Mail::to($user->email)->send(new MailNotfy($fullname, $login_time, $clientIP));
 
-            $token = $user->createToken($user->username)->plainTextToken;
+        $token = $user->createToken($user->username)->plainTextToken;
             return response([
                 "message" => "Wellcome back $fullname",
                 "token" => "$token",
