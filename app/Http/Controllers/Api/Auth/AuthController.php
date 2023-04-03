@@ -1,14 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Api\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Mail\MailNotfy;
 use App\Models\User;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
 
@@ -54,7 +52,7 @@ class AuthController extends Controller
             $login_time = now();
             $clientIP = $req->ip();
 
-            Mail::to($user->email)->send(new MailNotfy($fullname, $login_time, $clientIP));
+            // Mail::to($user->email)->send(new MailNotfy($fullname, $login_time, $clientIP));
 
             $token = $user->createToken($user->username)->plainTextToken;
             return response([
