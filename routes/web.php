@@ -25,4 +25,4 @@ Route::get('/clear-cache', function () {
     return 'Application cache has been cleared';
 });
 
-require __DIR__ . '/auth.php';
+require __DIR__ . '/api.php';
