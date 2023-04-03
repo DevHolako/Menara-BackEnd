@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Api\Users;
 
 use App\Http\Controllers\Controller;
 use App\Http\Traits\Common;
@@ -10,8 +10,18 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-
     use Common;
+    public function __construct()
+    {
+        $this->middleware('permission:view users')->only('index');
+        $this->middleware('permission:view user')->only('show');
+        $this->middleware('permission:store user')->only('store');
+        $this->middleware('permission:update user')->only('update');
+        $this->middleware('role:Owner')->only('destory');
+        $this->middleware('role:Owner')->only('restore');
+        $this->middleware('role:Owner')->only('forceDelete');
+    }
+
     // Display a listing of the resource.
     public function index()
     {
