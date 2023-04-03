@@ -1,12 +1,12 @@
 <?php
 
-use App\Http\Controllers\Api\ArticleController;
-use App\Http\Controllers\Api\AuthController;
-use App\Http\Controllers\Api\CategorieController;
-use App\Http\Controllers\Api\ClientController;
-use App\Http\Controllers\Api\PermissionController;
-use App\Http\Controllers\Api\RoleController;
-use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\Auth\AuthController;
+use App\Http\Controllers\Api\eCommerce\ArticleController;
+use App\Http\Controllers\Api\eCommerce\CategorieController;
+use App\Http\Controllers\Api\eCommerce\ClientController;
+use App\Http\Controllers\Api\RolesAndPermissions\PermissionController;
+use App\Http\Controllers\Api\RolesAndPermissions\RoleController;
+use App\Http\Controllers\Api\Users\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Route;
 
 // ------------ Public Routes ------------ //
 Route::get('/', function () {
-    return "hey from api";
+    return "Hey from Api v2";
 });
 
 Route::post("/register", [AuthController::class, "register"]);
