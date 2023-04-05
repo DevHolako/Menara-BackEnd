@@ -35,7 +35,7 @@ Route::post("/forgot-password", [AuthController::class, "resetPassword"]);
 Route::post('/reset-password', [AuthController::class, "handleResetPassword"]);
 #render form
 Route::get('reset-password/{token}', function ($token) {
-})->name('password.reset');
+});
 
 // ------------ Protected Routes ------------ //
 
