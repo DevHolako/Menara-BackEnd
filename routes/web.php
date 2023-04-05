@@ -12,17 +12,20 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
  */
+Route::group(['middleware' => ['auth:sanctum']], function () {
 
-Route::get('/', function () {
-    return ['Laravel' => app()->version()];
-});
+    Route::get('/', function () {
+        return ['Laravel' => app()->version()];
+    });
 
-Route::get('/clear-cache', function () {
-    Artisan::call('cache:clear');
-    Artisan::call('view:clear');
-    Artisan::call('config:cache');
-    Artisan::call('route:cache');
-    return 'Application cache has been cleared';
+    Route::get('/clear-cache', function () {
+        Artisan::call('cache:clear');
+        Artisan::call('view:clear');
+        Artisan::call('config:cache');
+        Artisan::call('route:cache');
+        return 'Application cache has been cleared';
+    });
+
 });
 
 require __DIR__ . '/api.php';
