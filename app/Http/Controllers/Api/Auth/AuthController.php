@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Traits\Common;
 use App\Models\User;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Http\Request;
@@ -12,22 +13,16 @@ use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
+
+    use Common;
     public function register(Request $req)
     {
-        $fileds = $req->validate([
-            'first_name' => "string|required",
-            'last_name' => "string|required",
-            'username' => "string|required|unique:users,username",
-            'email' => "email|required|unique:users,email",
-            'password' => "string|required|confirmed|min:8",
-            'role_id' => 'required|exists:roles,id',
-        ]);
-
-        $fileds['password'] = Hash::make($fileds['password']);
-
-        $user = User::create($fileds);
-
-        return response()->json(['message' => 'User created successfully', 'user' => $user], 201);
+        $is_Created = User::count();
+        if ($is_Created > 1) {
+            return response(["message" => "Register method not allowed"], 401);
+        };
+        CreateUser($req);
+        return response()->json(['message' => 'Owner created successfully', 'Owner' => $user], 201);
     }
 
     public function login(Request $req)
