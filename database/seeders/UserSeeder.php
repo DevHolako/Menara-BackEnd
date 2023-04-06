@@ -16,22 +16,9 @@ class UserSeeder extends Seeder
             "fullname" => "Holako",
             "username" => "HolakoNoob",
             "email" => "holako@p.com",
+            "role" => "Owner",
             "password" => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
 
         ])->assignRole('Owner');
-        User::create([
-            "fullname" => "admin",
-            "username" => "admin",
-            "email" => "admin@p.com",
-            "password" => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-
-        ])->assignRole('Admin');
-        User::create([
-            "fullname" => "Test",
-            "username" => "user",
-            "email" => "user@p.com",
-            "password" => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-
-        ])->assignRole('User');
     }
 }

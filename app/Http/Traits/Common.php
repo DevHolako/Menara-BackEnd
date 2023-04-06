@@ -12,12 +12,13 @@ trait Common
             'fullname' => "string|required",
             'username' => "string|required|unique:users,username",
             'email' => "email|required|unique:users,email",
+            "role" => "string|sometimes",
             'password' => "string|required|confirmed|min:8",
         ]);
 
         $fileds['password'] = Hash::make($fileds['password']);
         $user = User::create($fileds);
-
+        $user->assignRole($fileds->role);
         return response()->json(['message' => 'User created successfully', 'user' => $user], 201);
 
     }

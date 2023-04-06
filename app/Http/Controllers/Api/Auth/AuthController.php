@@ -43,15 +43,14 @@ class AuthController extends Controller
             ], 401);
         } else {
 
-            $fullname = $user->first_name . " " . $user->last_name;
             $login_time = now();
             $clientIP = $req->ip();
 
-            // Mail::to($user->email)->send(new MailNotfy($fullname, $login_time, $clientIP));
+            // Mail::to($user->email)->send(new MailNotfy($user->fullname, $login_time, $clientIP));
 
-            $token = $user->createToken($user->username)->plainTextToken;
+            $token = $user->createToken($user->fullname)->plainTextToken;
             return response([
-                "message" => "Wellcome back $fullname",
+                "message" => "Wellcome back $user->fullname",
                 "token" => "$token",
             ], 201);
         }
