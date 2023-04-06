@@ -63,8 +63,7 @@ class UserController extends Controller
         }
 
         $fileds = $req->validate([
-            'first_name' => "sometimes|required",
-            'last_name' => "sometimes|required",
+            'fullname' => "sometimes|required",
             'username' => "sometimes|required|unique:users,username," . $user->id,
             'email' => "sometimes|email|required|unique:users,email," . $user->id,
             'password' => "sometimes|required|confirmed|min:8",
