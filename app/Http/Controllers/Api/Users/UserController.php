@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api\Users;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Api\User\UserCollection;
+use App\Http\Resources\Api\User\UserResource;
 use App\Http\Traits\Common;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -29,7 +31,7 @@ class UserController extends Controller
         if (!$users) {
             return response()->json(["message" => "No users were found"], 404);
         };
-        return response()->json(['users' => $users]);
+        return new UserCollection($users);
     }
 
     // Store a newly created resource in storage.
@@ -37,7 +39,7 @@ class UserController extends Controller
     {
         $user = $this->CreateUser($req);
 
-        return $user;
+        return new UserResource($user);
     }
 
     // Display the specified resource.
@@ -49,7 +51,7 @@ class UserController extends Controller
             return response()->json(['message' => 'User not found'], 404);
         }
 
-        return response()->json(['user' => $user]);
+        return new UserResource($user);
 
     }
 
@@ -75,8 +77,8 @@ class UserController extends Controller
         }
 
         $user->update($fileds);
-
-        return response()->json(['message' => 'User updated successfully', 'user' => $user]);
+        $updated_user = new UserResource($user);
+        return response(['message' => 'User updated successfully', "user" => $updated_user]);
 
     }
 

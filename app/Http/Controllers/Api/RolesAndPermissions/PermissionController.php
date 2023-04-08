@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api\RolesAndPermissions;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Api\Permission\PermissionCollection;
+use App\Http\Resources\Api\Permission\PermissionResource;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Permission;
 
@@ -15,10 +17,10 @@ class PermissionController extends Controller
     {
         $permissions = Permission::all();
         if (empty($permissions)) {
-            return response()->json(["message" => "No permissions were found"], 204);
+            return response(["message" => "No permissions were found"], 204);
         }
 
-        return response()->json(["permissions" => $permissions]);
+        return new PermissionCollection($permissions);
 
     }
 
@@ -29,7 +31,8 @@ class PermissionController extends Controller
     {
         $validated = $request->validate(['name' => 'required|string|unique:permissions,name']);
         $perm = Permission::create($validated);
-        return response()->json(['message' => 'permission created successfully', 'permission' => $perm], 201);
+
+        return response(['message' => 'permission created successfully', 'permission' => new PermissionResource($perm)], 201);
     }
 
     /**
@@ -40,10 +43,10 @@ class PermissionController extends Controller
         $perm = Permission::find($id);
 
         if (!$perm) {
-            return response()->json(['message' => 'permission not found'], 404);
+            return response(['message' => 'permission not found'], 404);
         }
 
-        return response()->json(['permission' => $perm], 200);
+        return new PermissionResource($perm);
 
     }
 
@@ -55,7 +58,7 @@ class PermissionController extends Controller
         $perm = Permission::find($id);
 
         if (!$perm) {
-            return response()->json(['message' => 'permission not found'], 404);
+            return response(['message' => 'permission not found'], 404);
         }
 
         $fileds = $request->validate([
@@ -64,8 +67,7 @@ class PermissionController extends Controller
         ]);
 
         $perm->update($fileds);
-
-        return response()->json(['message' => 'permission updated successfully', 'permission' => $perm]);
+        return response(['message' => 'permission updated successfully', 'permission' => new PermissionResource($perm)]);
 
     }
 
@@ -77,12 +79,12 @@ class PermissionController extends Controller
         $perm = Permission::find($id);
 
         if (!$perm) {
-            return response()->json(['message' => 'role not found'], 404);
+            return response(['message' => 'role not found'], 404);
         }
 
         $perm->delete();
 
-        return response()->json(['message' => 'premissions deleted successfully']);
+        return response(['message' => 'premissions deleted successfully']);
 
     }
 }

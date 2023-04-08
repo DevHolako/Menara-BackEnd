@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api\RolesAndPermissions;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Api\Role\RoleCollection;
+use App\Http\Resources\Api\Role\RoleResource;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 
@@ -15,9 +17,9 @@ class RoleController extends Controller
     {
         $roles = Role::whereNotIn('name', ['Owner'])->get();
         if (empty($roles)) {
-            return response()->json(["message" => "No roles were found"], 204);
+            return response(["message" => "No roles were found"], 204);
         }
-        return response()->json(["roles" => $roles], 200);
+        return new RoleCollection($roles);
     }
 
     /**
@@ -27,7 +29,7 @@ class RoleController extends Controller
     {
         $validated = $request->validate(['name' => 'required|string']);
         $role = Role::create($validated);
-        return response()->json(['message' => 'Role created successfully', 'role' => $role], 201);
+        return response(['message' => 'Role created successfully', 'role' => new RoleResource($role)], 201);
     }
 
     /**
@@ -38,10 +40,10 @@ class RoleController extends Controller
         $role = Role::find($id);
 
         if (!$role) {
-            return response()->json(['message' => 'role not found'], 404);
+            return response(['message' => 'role not found'], 404);
         }
 
-        return response()->json(['role' => $role], 200);
+        return new RoleResource($role);
 
     }
 
@@ -53,7 +55,7 @@ class RoleController extends Controller
         $role = Role::find($id);
 
         if (!$role) {
-            return response()->json(['message' => 'Role not found'], 404);
+            return response(['message' => 'Role not found'], 404);
         }
 
         $fileds = $request->validate([
@@ -63,7 +65,7 @@ class RoleController extends Controller
 
         $role->update($fileds);
 
-        return response()->json(['message' => 'Role updated successfully', 'role' => $role]);
+        return response(['message' => 'Role updated successfully', 'role' => new RoleResource($role)]);
 
     }
 
@@ -75,12 +77,12 @@ class RoleController extends Controller
         $role = Role::find($id);
 
         if (!$role) {
-            return response()->json(['message' => 'role not found'], 404);
+            return response(['message' => 'role not found'], 404);
         }
 
         $role->delete();
 
-        return response()->json(['message' => 'role deleted successfully']);
+        return response(['message' => 'role deleted successfully']);
 
     }
 
@@ -89,16 +91,16 @@ class RoleController extends Controller
         $role = Role::find($id);
 
         if (!$role) {
-            return response()->json(['message' => 'Role not found'], 404);
+            return response(['message' => 'Role not found'], 404);
         }
         $validated = $request->validate(['name' => 'string|required|exists:permissions,name']);
 
         if ($role->hasPermissionTo($validated['name'])) {
-            return response()->json(['message' => 'Permission has already been granted in that role'], 403);
+            return response(['message' => 'Permission has already been granted in that role'], 403);
         }
 
         $role->givePermissionTo($validated['name']);
-        return response()->json(['message' => 'Permission has been granted'], 200);
+        return response(['message' => 'Permission has been granted'], 200);
 
     }
     public function RevokePermission(Request $request, string $id)
@@ -109,14 +111,14 @@ class RoleController extends Controller
         $role = Role::find($id);
 
         if (!$role) {
-            return response()->json(['message' => 'Role not found'], 404);
+            return response(['message' => 'Role not found'], 404);
         }
 
         if (!$role->hasPermissionTo($validated['name'])) {
-            return response()->json(['message' => 'Permission are not granted to this role'], 403);
+            return response(['message' => 'Permission are not granted to this role'], 403);
         }
         $role->revokePermissionTo($validated['name']);
-        return response()->json(['message' => 'Permission has been reovked'], 200);
+        return response(['message' => 'Permission has been reovked'], 200);
 
     }
 }
