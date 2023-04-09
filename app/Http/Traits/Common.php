@@ -1,10 +1,10 @@
 <?php
 namespace App\Http\Traits;
 
+use App\Http\Resources\Api\User\UserResource;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
-use App\Http\Resources\Api\User\UserResource;
 
 trait Common
 {
@@ -30,7 +30,7 @@ trait Common
         $newUser = User::create($fileds);
         $newUser->assignRole($fileds['role']);
 
-        return response()->json(["message" => 'User created successfully'],"newUser"=>new UserResource($newUser), 201);
+        return response()->json(["message" => 'User created successfully', "newUser" => new UserResource($newUser)], 201);
 
     }
 }
