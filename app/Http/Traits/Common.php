@@ -29,7 +29,7 @@ trait Common
         $user = User::create($fileds);
         $user->assignRole($fileds['role']);
 
-        return response()->json(['message' => 'User created successfully', 'user' => $user], 201);
+        return response()->json(["message" => 'User created successfully'], 201);
 
     }
 }

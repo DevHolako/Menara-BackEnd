@@ -37,9 +37,8 @@ class UserController extends Controller
     // Store a newly created resource in storage.
     public function store(Request $req)
     {
-        $user = $this->CreateUser($req);
-
-        return new UserResource($user);
+        $newUser = $this->CreateUser($req);
+        return $newUser;
     }
 
     // Display the specified resource.

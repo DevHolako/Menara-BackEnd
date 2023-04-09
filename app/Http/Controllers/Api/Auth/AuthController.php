@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Api\User\UserResource;
 use App\Http\Traits\Common;
 use App\Models\User;
 use Illuminate\Auth\Events\PasswordReset;
@@ -22,7 +23,7 @@ class AuthController extends Controller
             return response(["message" => "Register method not allowed"], 401);
         };
         CreateUser($req);
-        return response()->json(['message' => 'Owner created successfully', 'Owner' => $user], 201);
+        return response()->json(['message' => 'Owner created successfully', 'Owner' => new UserResource($user)], 201);
     }
 
     public function login(Request $req)
@@ -50,7 +51,7 @@ class AuthController extends Controller
 
             $token = $user->createToken($user->fullname)->plainTextToken;
             return response([
-                "user" => $user,
+                "user" => new UserResource($user),
                 "token" => $token,
             ], 201);
         }
