@@ -26,8 +26,8 @@ trait Common
             $fileds['role'] = 'User';
         }
 
-        $user = User::create($fileds);
-        $user->assignRole($fileds['role']);
+        $newUser = User::create($fileds);
+        $newUser->assignRole($fileds['role']);
 
         return response()->json(["message" => 'User created successfully'], 201);
 
