@@ -4,6 +4,7 @@ namespace App\Http\Traits;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
+use App\Http\Resources\Api\User\UserResource;
 
 trait Common
 {
