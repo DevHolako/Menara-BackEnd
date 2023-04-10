@@ -74,8 +74,12 @@ class UserController extends Controller
         if (isset($fileds['password'])) {
             $fileds['password'] = Hash::make($fileds['password']);
         }
-
         $user->update($fileds);
+
+        if (!$user->hasRole($fileds['role'])) {
+            $user->syncRoles($fileds['role']);
+        }
+
         $updated_user = new UserResource($user);
         return response(['message' => 'User updated successfully', "user" => $updated_user]);
 
