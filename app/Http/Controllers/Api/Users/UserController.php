@@ -68,7 +68,7 @@ class UserController extends Controller
             'username' => "sometimes|required|unique:users,username," . $user->id,
             'email' => "sometimes|email|required|unique:users,email," . $user->id,
             'password' => "sometimes|required|confirmed|min:8",
-            'role_id' => 'sometimes|required|exists:roles,id',
+            'role' => 'sometimes|required|exists:roles,name',
         ]);
 
         if (isset($fileds['password'])) {
