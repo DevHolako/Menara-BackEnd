@@ -43,6 +43,7 @@ class PermissionSeeder extends Seeder
 
     public function run(): void
     {
+
         $tables = ["user", "client", "article", "categorie"];
 
         // array of perm for each prefix

@@ -26,7 +26,7 @@ class CategorieController extends Controller
         if (!$categories) {
             return response()->json(["message" => "No Categories were found"], 404);
         };
-        return response()->json(['Categories' => $categories]);
+        return response()->json($categories);
     }
 
     // Store a newly created resource in storage.
@@ -50,7 +50,7 @@ class CategorieController extends Controller
             return response()->json(['message' => 'Categorie not found'], 404);
         }
 
-        return response()->json(['Categorie' => $categorie]);
+        return response()->json($categorie);
 
     }
 

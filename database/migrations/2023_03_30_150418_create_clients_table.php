@@ -17,6 +17,7 @@ return new class extends Migration
             $table->integer("ice");
             $table->integer("rc");
             $table->string("type");
+            $table->string("categorie")->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

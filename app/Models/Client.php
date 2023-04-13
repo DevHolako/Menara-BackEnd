@@ -15,6 +15,7 @@ class Client extends Model
         "ice",
         "rc",
         "type",
+        "categorie",
     ];
 
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\eCommerce;
 
 use App\Http\Controllers\Controller;
 use App\Models\Article;
+use Illuminate\Http\Request;
 
 class ArticleController extends Controller
 {
@@ -25,7 +26,7 @@ class ArticleController extends Controller
         if (!$articles) {
             return response()->json(["message" => "No articles were found"], 404);
         };
-        return response()->json(['articles' => $articles]);
+        return response()->json($articles);
     }
 
     // Store a newly created resource in storage.
@@ -33,7 +34,7 @@ class ArticleController extends Controller
     {
 
         $fileds = $req->validate([
-            "categorie_code" => "required|exists:categories,categories_code",
+            "categorie_code" => "required|exists:categories,code",
             "designtion" => "required|string",
             "prix" => "required|numeric",
         ]);
@@ -51,7 +52,7 @@ class ArticleController extends Controller
             return response()->json(['message' => 'article not found'], 404);
         }
 
-        return response()->json(['article' => $article]);
+        return response()->json($article);
 
     }
 

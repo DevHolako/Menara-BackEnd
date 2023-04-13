@@ -64,19 +64,19 @@ class UserController extends Controller
         }
 
         $fileds = $req->validate([
-            'fullname' => "sometimes|required",
-            'username' => "sometimes|required|unique:users,username," . $user->id,
-            'email' => "sometimes|email|required|unique:users,email," . $user->id,
-            'password' => "sometimes|required|confirmed|min:8",
-            'role' => 'sometimes|required|exists:roles,name',
+            'fullname' => "sometimes",
+            'username' => "sometimes|unique:users,username," . $user->id,
+            'email' => "sometimes|email|unique:users,email," . $user->id,
+            'password' => "sometimes|confirmed|min:8",
+            'role' => 'sometimes|exists:roles,name',
         ]);
 
         if (isset($fileds['password'])) {
             $fileds['password'] = Hash::make($fileds['password']);
         }
-        $user->update($fileds);
 
-        if (!$user->hasRole($fileds['role'])) {
+        $user->update($fileds);
+        if (isset($fileds['role'])) {
             $user->syncRoles($fileds['role']);
         }
 

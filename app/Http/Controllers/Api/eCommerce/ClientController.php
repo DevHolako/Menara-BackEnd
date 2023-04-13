@@ -11,7 +11,7 @@ class ClientController extends Controller
 
     public function __construct()
     {
-        $this->middleware('permission:view clinets')->only('index');
+        $this->middleware('permission:view clients')->only('index');
         $this->middleware('permission:view client')->only('show');
         $this->middleware('permission:store client')->only('store');
         $this->middleware('permission:update client')->only('update');
@@ -27,7 +27,7 @@ class ClientController extends Controller
         if (!$clients) {
             return response()->json(["message" => "No clients were found"], 404);
         };
-        return response()->json(['clients' => $clients]);
+        return response()->json($clients);
     }
 
     // Store a newly created resource in storage.
@@ -39,6 +39,8 @@ class ClientController extends Controller
             "ice" => "required|numeric|unique:clients,ice",
             "rc" => "required|numeric|unique:clients,rc",
             "type" => "required|string",
+            "categorie" => "sometimes|string",
+
         ]);
 
         $client = Client::create($fileds);
@@ -54,7 +56,7 @@ class ClientController extends Controller
             return response()->json(['message' => 'client not found'], 404);
         }
 
-        return response()->json(['client' => $client]);
+        return response()->json($client);
 
     }
 

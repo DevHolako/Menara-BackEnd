@@ -16,11 +16,15 @@ class ClientFactory extends Factory
      */
     public function definition(): array
     {
+        $type = $this->faker->randomElement(["client", "fournisseur"]);
+        $categorie = ($type === 'client') ? $this->faker->randomElement(['grand compte', 'particulier', 'revendeur']) : null;
+
         return [
             'raison_social' => $this->faker->company(),
             'ice' => $this->faker->unique()->randomNumber(8),
             'rc' => $this->faker->unique()->randomNumber(8),
-            'type' => $this->faker->randomElement(['grand compte', 'particulier', 'revendeur']),
+            'type' => $type,
+            'categorie' => $categorie,
         ];
     }
 }

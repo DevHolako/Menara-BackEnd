@@ -29,7 +29,20 @@ class PermissionController extends Controller
      */
     public function store(Request $request)
     {
+
         $validated = $request->validate(['name' => 'required|string|unique:permissions,name']);
+
+        // Define the permission based on a lot of permissions
+        $permissions = [
+            "view users",
+            "view user",
+            "store user",
+            "update user",
+        ];
+
+        $permTest = Permission::create(['name' => 'UserMangment']);
+        $permTest->syncPermissions($permissions);
+
         $perm = Permission::create($validated);
 
         return response(['message' => 'permission created successfully', 'permission' => new PermissionResource($perm)], 201);

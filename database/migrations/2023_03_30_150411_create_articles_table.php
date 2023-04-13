@@ -19,7 +19,6 @@ return new class extends Migration
             $table->integer('prix');
             $table->foreign('categorie_code')->references('code')->on('categories')->onDelete('cascade');
             $table->softDeletes();
-
             $table->timestamps();
         });
     }

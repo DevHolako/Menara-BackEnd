@@ -55,13 +55,13 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     // Article-related routes
     Route::apiResource('articles', ArticleController::class);
-    Route::post('/articles/article/restore', [ArticleController::class, 'restore']);
-    Route::delete('/articles/article/force_delete', [ArticleController::class, 'forceDelete']);
+    Route::post('/articles/{article}/restore', [ArticleController::class, 'restore']);
+    Route::delete('/articles/{article}/force_delete', [ArticleController::class, 'forceDelete']);
 
     // Categorie-related routes
     Route::apiResource('categories', CategorieController::class);
-    Route::post('/categories/categorie/restore', [CategorieController::class, 'restore']);
-    Route::delete('/categories/categorie/force_delete', [CategorieController::class, 'forceDelete']);
+    Route::post('/categories/{categorie}/restore', [CategorieController::class, 'restore']);
+    Route::delete('/categories/{categorie}/force_delete', [CategorieController::class, 'forceDelete']);
 
     // Admin Routes
     Route::middleware(['role:Owner|Admin'])->group(function () {
