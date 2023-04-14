@@ -52,7 +52,7 @@ mso-hide:all;
 <td align="center" valign="top" style="padding:0;Margin:0;width:520px">
 <table cellpadding="0" cellspacing="0" width="100%" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
 <tr>
-<td align="center" style="padding:0;Margin:0;font-size:0px"><a target="_blank" href="https://viewstripo.email" style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#2D3142;font-size:14px"><img src="https://drnesv.stripocdn.email/content/guids/CABINET_95ac9fee1c25cd16be618dbfe3dc046eee9770203f903d66312b8a1d05869cbf/images/logo.png" alt="Logo" style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" height="60" title="Logo"></a></td>
+<td align="center" style="padding:0;Margin:0;font-size:0px;paddig:0"><a target="_blank" href="https://viewstripo.email" style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#2D3142;font-size:14px"><img src="https://drnesv.stripocdn.email/content/guids/CABINET_95ac9fee1c25cd16be618dbfe3dc046eee9770203f903d66312b8a1d05869cbf/images/logo.png" alt="Logo" style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" height="60" title="Logo"></a></td>
 </tr>
 </table></td>
 </tr>
