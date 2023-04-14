@@ -18,7 +18,6 @@ class PermissionSeeder extends Seeder
 
         foreach ($prefixes as $prefix) {
             $permissionNames = [
-                "view {$prefix}s",
                 "view {$prefix}",
                 "store {$prefix}",
                 "update {$prefix}",
@@ -44,7 +43,7 @@ class PermissionSeeder extends Seeder
     public function run(): void
     {
 
-        $tables = ["user", "client", "article", "categorie"];
+        $tables = ["user", "client", "article", "categorie", "devi"];
 
         // array of perm for each prefix
         $list = $this->generatePermissionsArray(...$tables);
