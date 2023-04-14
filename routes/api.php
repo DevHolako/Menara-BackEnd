@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\Auth\AuthController;
+use App\Http\Controllers\Api\Devi\DeviController;
 use App\Http\Controllers\Api\eCommerce\ArticleController;
 use App\Http\Controllers\Api\eCommerce\CategorieController;
 use App\Http\Controllers\Api\eCommerce\ClientController;
@@ -62,6 +63,11 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::apiResource('categories', CategorieController::class);
     Route::post('/categories/{categorie}/restore', [CategorieController::class, 'restore']);
     Route::delete('/categories/{categorie}/force_delete', [CategorieController::class, 'forceDelete']);
+
+    // Devi-related routes
+    Route::apiResource("devis", DeviController::class);
+    Route::post('/devis/{devi}/restore', [DeviController::class, 'restore']);
+    Route::delete('/devis/{devi}/force_delete', [DeviController::class, 'forceDelete']);
 
     // Admin Routes
     Route::middleware(['role:Owner|Admin'])->group(function () {
