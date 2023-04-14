@@ -18,6 +18,7 @@ class DeviController extends Controller
         $this->middleware('permission:soft-delete devi')->only('destory');
         $this->middleware('permission:restore devi')->only('restore');
         $this->middleware('permission:force-delete devi')->only('forceDelete');
+
     }
     /**
      * Display a listing of the resource.
