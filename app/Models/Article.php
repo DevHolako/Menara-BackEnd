@@ -32,4 +32,8 @@ class Article extends Model
     {
         return $this->belongsTo(Categorie::class, "categorie_code");
     }
+
+    public  function devi(){
+        return $this->belongsTo(Devi::class)->withPivot("qty","prix","total");
+    }
 }
