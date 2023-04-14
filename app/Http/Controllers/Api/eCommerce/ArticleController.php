@@ -11,8 +11,7 @@ class ArticleController extends Controller
 
     public function __construct()
     {
-        $this->middleware('permission:view articles')->only('index');
-        $this->middleware('permission:view article')->only('show');
+        $this->middleware('permission:view article')->only('index', 'show');
         $this->middleware('permission:store article')->only('store');
         $this->middleware('permission:update article')->only('update');
         $this->middleware('permission:soft-delete article')->only('destory');

@@ -9,12 +9,22 @@ use Illuminate\Http\Request;
 
 class DeviController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('permission:view devi')->only('index', 'show');
+        $this->middleware('permission:store devi')->only('store');
+        $this->middleware('permission:update devi')->only('update');
+        $this->middleware('permission:soft-delete devi')->only('destory');
+        $this->middleware('permission:restore devi')->only('restore');
+        $this->middleware('permission:force-delete devi')->only('forceDelete');
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $devis = Devi::with('client', 'products')->get();
+        $devis = Devi::with('client', 'article')->get();
         return DeviResource::collection($devis);
 
     }

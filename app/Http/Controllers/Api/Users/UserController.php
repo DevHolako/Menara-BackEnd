@@ -15,8 +15,7 @@ class UserController extends Controller
     use Common;
     public function __construct()
     {
-        $this->middleware('permission:view users')->only('index');
-        $this->middleware('permission:view user')->only('show');
+        $this->middleware('permission:store user')->only('store');
         $this->middleware('permission:store user')->only('store');
         $this->middleware('permission:update user')->only('update');
         $this->middleware('role:Owner')->only('destory');

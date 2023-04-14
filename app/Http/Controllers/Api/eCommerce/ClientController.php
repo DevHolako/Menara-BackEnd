@@ -11,8 +11,7 @@ class ClientController extends Controller
 
     public function __construct()
     {
-        $this->middleware('permission:view clients')->only('index');
-        $this->middleware('permission:view client')->only('show');
+        $this->middleware('permission:view client')->only('index', 'show');
         $this->middleware('permission:store client')->only('store');
         $this->middleware('permission:update client')->only('update');
         $this->middleware('permission:soft-delete client')->only('destory');
@@ -35,7 +34,7 @@ class ClientController extends Controller
     {
 
         $fileds = $req->vlaidat([
-            "raison_social" => "required|numeric|unique:clients,raison_social",
+            "raison_social" => "required|string|unique:clients,raison_social",
             "ice" => "required|numeric|unique:clients,ice",
             "rc" => "required|numeric|unique:clients,rc",
             "type" => "required|string",
@@ -70,10 +69,11 @@ class ClientController extends Controller
         }
 
         $fileds = $req->validate([
-            "raison_social" => "sometimes|numeric|unique:clients,raison_social",
+            "raison_social" => "sometimes|string|unique:clients,raison_social",
             "ice" => "sometimes|numeric|unique:clients,ice",
             "rc" => "sometimes|numeric|unique:clients,rc",
-            "type" => "sometimes|string",
+            "type" => "required|string",
+            "categorie" => "sometimes|string",
         ]);
 
         $client->update($fileds);
