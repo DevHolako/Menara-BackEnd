@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Api\Devi;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\API\Devi\DeviCollection;
 use App\Http\Resources\API\Devi\DeviResource;
 use App\Models\Devi;
 use Illuminate\Http\Request;
@@ -26,9 +25,8 @@ class DeviController extends Controller
      */
     public function index()
     {
-        $devis = Devi::with('client', 'article')->get();
-        return new DeviCollection($devis);
-
+        // $devis = Devi::with('client', 'article')->get();
+        return DeviResource::collection(Devi::with('client', 'article')->get());
     }
 
     /**
