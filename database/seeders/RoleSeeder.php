@@ -15,10 +15,7 @@ class RoleSeeder extends Seeder
     {
         $onwer = Role::create(['name' => 'Owner', 'guard_name' => 'sanctum']);
         $admin = Role::create(['name' => 'Admin', 'guard_name' => 'sanctum']);
-        Role::create(['name' => 'User', 'guard_name' => 'sanctum']);
-
         $permissions = Permission::all();
         $onwer->syncPermissions($permissions);
-        $admin->syncPermissions($permissions);
     }
 }
