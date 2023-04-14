@@ -33,7 +33,7 @@ class ClientController extends Controller
     public function store(Request $req)
     {
 
-        $fileds = $req->vlaidat([
+        $fileds = $req->validate([
             "raison_social" => "required|string|unique:clients,raison_social",
             "ice" => "required|numeric|unique:clients,ice",
             "rc" => "required|numeric|unique:clients,rc",
@@ -41,7 +41,6 @@ class ClientController extends Controller
             "categorie" => "sometimes|string",
 
         ]);
-
         $client = Client::create($fileds);
         return response()->json(['message' => 'client created successfully', 'client' => $client]);
     }
