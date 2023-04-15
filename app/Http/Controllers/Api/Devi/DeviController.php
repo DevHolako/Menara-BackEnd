@@ -68,13 +68,13 @@ class DeviController extends Controller
     {
         $devi = Devi::find($id);
         $validatedData = $request->validate([
-            'code' => 'required',
-            'date' => 'required',
-            'client_id' => 'required',
-            'products' => 'required|array',
-            'products.*.id' => 'required',
-            'products.*.qty' => 'required',
-            'products.*.price' => 'required',
+            'code' => 'sometimes',
+            'date' => 'sometimes',
+            'client_id' => 'sometimes',
+            'products' => 'sometimes|array',
+            'products.*.id' => 'sometimes',
+            'products.*.qty' => 'sometimes',
+            'products.*.price' => 'sometimes',
         ]);
 
         $devi->update($validatedData);
