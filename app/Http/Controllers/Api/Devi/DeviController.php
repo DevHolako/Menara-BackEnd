@@ -26,7 +26,8 @@ class DeviController extends Controller
     public function index()
     {
         // $devis = Devi::with('client', 'article')->get();
-        return DeviResource::collection(Devi::with('client', 'article')->get());
+        $devi = DeviResource::collection(Devi::with('client', 'article')->get());
+        return $devi;
     }
 
     /**
