@@ -43,7 +43,7 @@ class PermissionSeeder extends Seeder
     public function run(): void
     {
 
-        $tables = ["user", "client", "article", "categorie", "devi"];
+        $tables = ["user", "client", "article", "categorie", "devi", "role"];
 
         // array of perm for each prefix
         $list = $this->generatePermissionsArray(...$tables);

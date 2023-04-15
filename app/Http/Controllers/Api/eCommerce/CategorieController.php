@@ -12,12 +12,13 @@ class CategorieController extends Controller
     public function __construct()
     {
         $this->middleware('permission:view categorie')->only('index', 'show');
-        $this->middleware('permission:store categorie')->only('store');
-        $this->middleware('permission:update categorie')->only('update');
-        $this->middleware('permission:soft-delete categorie')->only('destory');
-        $this->middleware('permission:restore categorie')->only('restore');
-        $this->middleware('permission:force-delete categorie')->only('forceDelete');
+        $this->middleware('permission:store categorie')->only('index', 'show', 'store');
+        $this->middleware('permission:update categorie')->only('index', 'show', 'update');
+        $this->middleware('permission:soft-delete categorie')->only('index', 'show', 'destory');
+        $this->middleware('permission:restore categorie')->only('index', 'show', 'destory', 'restore');
+        $this->middleware('permission:force-delete categorie')->only('index', 'show', 'destory', 'destory', 'forceDelete');
     }
+
     // Display a listing of the resource.
     public function index()
     {

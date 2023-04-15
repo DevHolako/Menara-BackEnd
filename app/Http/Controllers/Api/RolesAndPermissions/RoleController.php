@@ -10,6 +10,16 @@ use Spatie\Permission\Models\Role;
 
 class RoleController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:view role')->only('index', 'show');
+        $this->middleware('permission:store role')->only('index', 'show', 'store');
+        $this->middleware('permission:update role')->only('index', 'show', 'update');
+        $this->middleware('permission:soft-delete role')->only('index', 'show', 'destory');
+        $this->middleware('permission:restore role')->only('index', 'show', 'destory', 'restore');
+        $this->middleware('permission:force-delete role')->only('index', 'show', 'destory', 'destory', 'forceDelete');
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -27,8 +37,12 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate(['name' => 'required|string']);
-        $role = Role::create($validated);
+        $fileds = $request->validate(['name' => 'required|string', 'perms' => 'sometimes|array']);
+        $role = Role::create($fileds);
+        if (isset($fileds["perms"])) {
+
+            $role = $role->syncPermissions($fileds['perms']);
+        }
         return response(['message' => 'Role created successfully', 'role' => new RoleResource($role)], 201);
     }
 

@@ -12,11 +12,11 @@ class ClientController extends Controller
     public function __construct()
     {
         $this->middleware('permission:view client')->only('index', 'show');
-        $this->middleware('permission:store client')->only('store');
-        $this->middleware('permission:update client')->only('update');
-        $this->middleware('permission:soft-delete client')->only('destory');
-        $this->middleware('permission:restore client')->only('restore');
-        $this->middleware('permission:force-delete client')->only('forceDelete');
+        $this->middleware('permission:store client')->only('index', 'show', 'store');
+        $this->middleware('permission:update client')->only('index', 'show', 'update');
+        $this->middleware('permission:soft-delete client')->only('index', 'show', 'destory');
+        $this->middleware('permission:restore client')->only('index', 'show', 'destory', 'restore');
+        $this->middleware('permission:force-delete client')->only('index', 'show', 'destory', 'destory', 'forceDelete');
     }
 
     // Display a listing of the resource.
