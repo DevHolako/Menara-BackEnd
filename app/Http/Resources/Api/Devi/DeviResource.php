@@ -21,7 +21,8 @@ class DeviResource extends JsonResource
             'code' => $this->code,
             'date' => $this->date,
             'client' => new CleintResource($this->client),
-            'products' => AricleResource::collection($this->whenLoaded('products')),
+            'articles' => AricleResource::collection($this->whenLoaded('article')),
         ];
+
     }
 }
