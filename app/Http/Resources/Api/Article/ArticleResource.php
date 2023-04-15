@@ -18,7 +18,9 @@ class ArticleResource extends JsonResource
             "id" => $this->id,
             "code" => $this->code,
             "designtion" => $this->designtion,
-            "prix" => $this->prix,
+            "qty" => $this->pivot->qty,
+            "prix" => $this->pivot->prix,
+            "total" => $this->pivot->total,
         ];
 
     }

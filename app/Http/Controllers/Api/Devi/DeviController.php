@@ -25,9 +25,10 @@ class DeviController extends Controller
      */
     public function index()
     {
-        // $devis = Devi::with('client', 'article')->get();
-        $devi = DeviResource::collection(Devi::with('client', 'article')->get());
-        return $devi;
+
+        return DeviResource::collection(Devi::with('client', 'article')->get());
+        // return Devi::with('client', 'article')->get();
+
     }
 
     /**
@@ -57,7 +58,7 @@ class DeviController extends Controller
     public function show(string $id)
     {
         $devi = Devi::find($id);
-        $devi->load('client', 'products');
+        $devi->load('client', 'article');
         return new DeviResource($devi);
     }
 
@@ -71,17 +72,17 @@ class DeviController extends Controller
             'code' => 'sometimes',
             'date' => 'sometimes',
             'client_id' => 'sometimes',
-            'products' => 'sometimes|array',
-            'products.*.id' => 'sometimes',
-            'products.*.qty' => 'sometimes',
-            'products.*.price' => 'sometimes',
+            'articles' => 'sometimes|array',
+            'articles.*.id' => 'sometimes',
+            'articles.*.qty' => 'sometimes',
+            'articles.*.price' => 'sometimes',
         ]);
 
         $devi->update($validatedData);
 
-        $devi->articles()->sync($request->input('products'));
+        $devi->articles()->sync($request->input('article'));
 
-        $devi->load('client', 'products');
+        $devi->load('client', 'article');
         return new DeviResource($devi);
     }
 
