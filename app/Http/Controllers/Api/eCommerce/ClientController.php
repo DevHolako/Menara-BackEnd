@@ -68,11 +68,12 @@ class ClientController extends Controller
         }
 
         $fileds = $req->validate([
-            "raison_social" => "sometimes|string," . $client->id,
+            "raison_social" => "sometimes|string|unique:clients,raison_social," . $client->id,
             "ice" => "sometimes|numeric|unique:clients,ice," . $client->id,
             "rc" => "sometimes|numeric|unique:clients,rc," . $client->id,
             "type" => "sometimes|string",
             "categorie" => "sometimes|string",
+
         ]);
 
         $client->update($fileds);
