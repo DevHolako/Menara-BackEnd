@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api\Devi;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\API\Devi\DeviResource;
+use App\Http\Resources\Api\Devi\DeviResource;
 use App\Models\Devi;
 use Illuminate\Http\Request;
 

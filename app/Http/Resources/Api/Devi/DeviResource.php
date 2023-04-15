@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Resources\API\Devi;
+namespace App\Http\Resources\Api\Devi;
 
-use App\Http\Resources\API\Article\AricleResource;
-use App\Http\Resources\API\Client\CleintResource;
+use App\Http\Resources\Api\Article\ArticleResource;
+use App\Http\Resources\Api\Client\ClientResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -20,8 +20,8 @@ class DeviResource extends JsonResource
             'id' => $this->id,
             'code' => $this->code,
             'date' => $this->date,
-            'client' => new CleintResource($this->client),
-            'articles' => AricleResource::collection($this->whenLoaded('article')),
+            'client' => new ClientResource($this->client),
+            'articles' => ArticleResource::collection($this->whenLoaded('article')),
         ];
 
     }

@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Resources\API\Client;
+namespace App\Http\Resources\Api\Client;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class CleintResource extends JsonResource
+class ClientResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -14,9 +14,10 @@ class CleintResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return  [
-            "id"=>$this->id,
-            "Raison Social"=>$this->raison_social,
+        return [
+            "id" => $this->id,
+            "Raison Social" => $this->raison_social,
         ];
+
     }
 }

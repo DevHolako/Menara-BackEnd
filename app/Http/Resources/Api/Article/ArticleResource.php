@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Resources\API\Article;
+namespace App\Http\Resources\Api\Article;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class AricleResource extends JsonResource
+class ArticleResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,10 +15,11 @@ class AricleResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            "id"=>$this->id,
-            "code"=>$this->code,
-            "designtion"=>$this->designtion,
-            "prix"=>$this->prix,
+            "id" => $this->id,
+            "code" => $this->code,
+            "designtion" => $this->designtion,
+            "prix" => $this->prix,
         ];
+
     }
 }
