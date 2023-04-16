@@ -37,11 +37,10 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        $fileds = $request->validate(['name' => 'required|string', 'perms' => 'sometimes|array']);
+        $fileds = $request->validate(['name' => 'required|string|unique:roles,name', 'perms' => 'sometimes|array']);
         $role = Role::create($fileds);
         if (isset($fileds["perms"])) {
-
-            $role = $role->syncPermissions($fileds['perms']);
+            $role->syncPermissions($fileds['perms']);
         }
         return response(['message' => 'Role created successfully', 'role' => new RoleResource($role)], 201);
     }
