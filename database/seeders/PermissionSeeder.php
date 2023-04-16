@@ -21,9 +21,7 @@ class PermissionSeeder extends Seeder
                 "view {$prefix}",
                 "store {$prefix}",
                 "update {$prefix}",
-                "soft-delete {$prefix}",
-                "restore {$prefix}",
-                "force-delete {$prefix}",
+                "delete {$prefix}",
             ];
 
             $main = array_merge($main, $permissionNames);
