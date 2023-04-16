@@ -15,9 +15,7 @@ class RoleController extends Controller
         $this->middleware('permission:view role')->only('index', 'show');
         $this->middleware('permission:store role')->only('index', 'show', 'store');
         $this->middleware('permission:update role')->only('index', 'show', 'update');
-        $this->middleware('permission:soft-delete role')->only('index', 'show', 'destory');
-        $this->middleware('permission:restore role')->only('index', 'show', 'destory', 'restore');
-        $this->middleware('permission:force-delete role')->only('index', 'show', 'destory', 'destory', 'forceDelete');
+        $this->middleware('permission:delete role')->only('index', 'show', 'destory', 'restore', 'forceDelete');
     }
 
     /**
@@ -25,7 +23,8 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $roles = Role::whereNotIn('name', ['Owner'])->get();
+        $roles = Role::whereNotIn('name', ['Owner'])->with('permissions')->get();
+
         if (empty($roles)) {
             return response(["message" => "No roles were found"], 204);
         }
@@ -66,18 +65,17 @@ class RoleController extends Controller
     public function update(Request $request, string $id)
     {
         $role = Role::find($id);
-
         if (!$role) {
             return response(['message' => 'Role not found'], 404);
         }
 
         $fileds = $request->validate([
-            'name' => "required|string|unique:roles,name",
-            'guard_name' => "sometimes|string",
+            'name' => "sometimes|string|unique:roles,name," . $role->id,
+            'perms' => 'sometimes|array',
         ]);
 
+        return $fileds;
         $role->update($fileds);
-
         return response(['message' => 'Role updated successfully', 'role' => new RoleResource($role)]);
 
     }
