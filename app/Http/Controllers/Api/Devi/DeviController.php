@@ -15,9 +15,7 @@ class DeviController extends Controller
         $this->middleware('permission:view devi')->only('index', 'show');
         $this->middleware('permission:store devi')->only('index', 'show', 'store');
         $this->middleware('permission:update devi')->only('index', 'show', 'update');
-        $this->middleware('permission:soft-delete devi')->only('index', 'show', 'destory');
-        $this->middleware('permission:restore devi')->only('index', 'show', 'destory', 'restore');
-        $this->middleware('permission:force-delete devi')->only('index', 'show', 'destory', 'destory', 'forceDelete');
+        $this->middleware('permission:delete devi')->only('index', 'show', 'destory', 'restore', 'forceDelete');
     }
 
     /**

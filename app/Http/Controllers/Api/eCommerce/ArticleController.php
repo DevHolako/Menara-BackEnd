@@ -14,11 +14,8 @@ class ArticleController extends Controller
         $this->middleware('permission:view article')->only('index', 'show');
         $this->middleware('permission:store article')->only('index', 'show', 'store');
         $this->middleware('permission:update article')->only('index', 'show', 'update');
-        $this->middleware('permission:soft-delete article')->only('index', 'show', 'destory');
-        $this->middleware('permission:restore article')->only('index', 'show', 'destory', 'restore');
-        $this->middleware('permission:force-delete article')->only('index', 'show', 'destory', 'destory', 'forceDelete');
+        $this->middleware('permission:delete article')->only('index', 'show', 'destory', 'restore', 'forceDelete');
     }
-
     // Display a listing of the resource.
     public function index()
     {

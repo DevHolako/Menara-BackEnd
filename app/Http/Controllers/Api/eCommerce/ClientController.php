@@ -14,9 +14,7 @@ class ClientController extends Controller
         $this->middleware('permission:view client')->only('index', 'show');
         $this->middleware('permission:store client')->only('index', 'show', 'store');
         $this->middleware('permission:update client')->only('index', 'show', 'update');
-        $this->middleware('permission:soft-delete client')->only('index', 'show', 'destory');
-        $this->middleware('permission:restore client')->only('index', 'show', 'destory', 'restore');
-        $this->middleware('permission:force-delete client')->only('index', 'show', 'destory', 'destory', 'forceDelete');
+        $this->middleware('permission:delete client')->only('index', 'show', 'destory', 'restore', 'forceDelete');
     }
 
     // Display a listing of the resource.

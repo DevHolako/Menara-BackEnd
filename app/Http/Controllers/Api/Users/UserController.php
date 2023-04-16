@@ -13,14 +13,13 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
     use Common;
+
     public function __construct()
     {
-        $this->middleware('permission:store user')->only('store');
-        $this->middleware('permission:store user')->only('store');
-        $this->middleware('permission:update user')->only('update');
-        $this->middleware('role:Owner')->only('destory');
-        $this->middleware('role:Owner')->only('restore');
-        $this->middleware('role:Owner')->only('forceDelete');
+        $this->middleware('permission:view user')->only('index', 'show');
+        $this->middleware('permission:store user')->only('index', 'show', 'store');
+        $this->middleware('permission:update user')->only('index', 'show', 'update');
+        $this->middleware('role:Owner')->only('destory', 'restore', 'forceDelete');
     }
 
     // Display a listing of the resource.

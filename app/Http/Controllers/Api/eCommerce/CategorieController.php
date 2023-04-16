@@ -8,17 +8,13 @@ use Illuminate\Http\Request;
 
 class CategorieController extends Controller
 {
-
     public function __construct()
     {
         $this->middleware('permission:view categorie')->only('index', 'show');
         $this->middleware('permission:store categorie')->only('index', 'show', 'store');
         $this->middleware('permission:update categorie')->only('index', 'show', 'update');
-        $this->middleware('permission:soft-delete categorie')->only('index', 'show', 'destory');
-        $this->middleware('permission:restore categorie')->only('index', 'show', 'destory', 'restore');
-        $this->middleware('permission:force-delete categorie')->only('index', 'show', 'destory', 'destory', 'forceDelete');
+        $this->middleware('permission:delete categorie')->only('index', 'show', 'destory', 'restore', 'forceDelete');
     }
-
     // Display a listing of the resource.
     public function index()
     {
