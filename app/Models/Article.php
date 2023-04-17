@@ -14,7 +14,7 @@ class Article extends Model
     protected $fillable = [
         "code",
         "categorie_code",
-        "designtion",
+        "designation",
         "prix",
     ];
 
@@ -33,7 +33,8 @@ class Article extends Model
         return $this->belongsTo(Categorie::class, "categorie_code");
     }
 
-    public  function devi(){
-        return $this->belongsTo(Devi::class)->withPivot("qty","prix","total");
+    public function devi()
+    {
+        return $this->belongsTo(Devi::class)->withPivot("qty", "prix", "total");
     }
 }

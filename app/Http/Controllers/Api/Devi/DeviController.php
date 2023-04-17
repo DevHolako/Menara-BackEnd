@@ -37,10 +37,11 @@ class DeviController extends Controller
         $validatedData = $request->validate([
             'date' => 'sometimes|date',
             'client_id' => 'required|exists:clients,id',
-            'article' => 'required|array',
-            'article.*.article_id' => 'required|exists:articles,id',
-            'article.*.qty' => 'required',
-            'article.*.prix' => 'required',
+            'articles' => 'required|array',
+            'articles.*.article_id' => 'required|exists:articles,id',
+            'articles.*.designation' => 'required|exists:articles,designation',
+            'articles.*.qty' => 'required',
+            'articles.*.prix' => 'required',
         ]);
 
         $devi = Devi::create($validatedData);

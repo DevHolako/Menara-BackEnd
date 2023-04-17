@@ -26,7 +26,7 @@ class ArticleFactory extends Factory
 
         return [
             'categorie_code' => $this->faker->randomElement($categorie_code),
-            'designtion' => $this->faker->unique->randomElement([
+            'designation' => $this->faker->unique->randomElement([
                 "Laisse pour chien",
                 "Nourriture pour chat",
                 "Aquarium en verre",

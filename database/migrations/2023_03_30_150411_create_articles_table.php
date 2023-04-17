@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string("code")->unique()->default('ART');
             $table->string("categorie_code");
-            $table->string("designtion");
+            $table->string("designation");
             $table->integer('prix');
             $table->foreign('categorie_code')->references('code')->on('categories')->onDelete('cascade');
             $table->softDeletes();

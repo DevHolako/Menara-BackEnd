@@ -32,7 +32,7 @@ class ArticleController extends Controller
 
         $fileds = $req->validate([
             "categorie_code" => "required|exists:categories,code",
-            "designtion" => "required|string",
+            "designation" => "required|string",
             "prix" => "required|numeric",
         ]);
 
@@ -64,7 +64,7 @@ class ArticleController extends Controller
 
         $fileds = $req->validate([
             "categorie_code" => "sometimes|string|exists:categories,code",
-            "designtion" => "sometimes|string",
+            "designation" => "sometimes|string",
             "prix" => "sometimes|numeric",
         ]);
 
