@@ -16,7 +16,7 @@ class ClientResource extends JsonResource
     {
         return [
             "id" => $this->id,
-            "Raison Social" => $this->raison_social,
+            "raisonSocial" => $this->raison_social,
         ];
 
     }
