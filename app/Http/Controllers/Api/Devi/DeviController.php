@@ -25,7 +25,6 @@ class DeviController extends Controller
     {
 
         return DeviResource::collection(Devi::with('client', 'article')->get());
-        // return Devi::with('client', 'article')->get();
 
     }
 
@@ -34,18 +33,18 @@ class DeviController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
+        $fileds = $request->validate([
             'date' => 'sometimes|date',
             'client_id' => 'required|exists:clients,id',
             'articles' => 'required|array',
             'articles.*.article_id' => 'required|exists:articles,id',
-            'articles.*.designation' => 'required|exists:articles,designation',
             'articles.*.qty' => 'required',
             'articles.*.prix' => 'required',
+            'total' => 'required',
         ]);
 
-        $devi = Devi::create($validatedData);
-        $devi->article()->sync($request->input('article'));
+        $devi = Devi::create($fileds);
+        $devi->article()->sync($request->input('articles'));
 
         $devi->load('client', 'article');
         return new DeviResource($devi);

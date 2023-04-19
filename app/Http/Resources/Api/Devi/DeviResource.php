@@ -22,6 +22,7 @@ class DeviResource extends JsonResource
             'date' => $this->date,
             'client' => new ClientResource($this->client),
             'articles' => ArticleResource::collection($this->whenLoaded('article')),
+            'total' => $this->total,
         ];
 
     }

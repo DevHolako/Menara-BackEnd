@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -14,9 +15,10 @@ return new class extends Migration
         Schema::create('devis', function (Blueprint $table) {
             $table->id();
             $table->string('code')->unique()->default('DEV');
-            $table->date('date')->default(now());
+            $table->date('date')->default(Carbon::now());
             $table->unsignedBigInteger('client_id');
             $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade')->onUpdate("cascade");
+            $table->integer("total")->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

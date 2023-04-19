@@ -17,6 +17,7 @@ class Devi extends Model
         "code",
         "date",
         "client_id",
+        "total",
     ];
 
     public static function boot()
