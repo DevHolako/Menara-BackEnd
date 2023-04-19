@@ -25,18 +25,20 @@ class UserController extends Controller
     // Display a listing of the resource.
     public function index()
     {
-        $users = User::all();
-        if (!$users) {
-            return response()->json(["message" => "No users were found"], 404);
-        };
+        $users = User::where('role', '<>', 'Owner')->get();
+
+        if ($users->isEmpty()) {
+            return response()->json(["message" => "No users were found"], 204);
+        }
+
         return new UserCollection($users);
     }
 
     // Store a newly created resource in storage.
     public function store(Request $req)
     {
-        $newUser = $this->CreateUser($req);
-        return $newUser;
+        $response = $this->CreateUser($req);
+        return $response;
     }
 
     // Display the specified resource.
@@ -45,11 +47,10 @@ class UserController extends Controller
         $user = User::find($id);
 
         if (!$user) {
-            return response()->json(['message' => 'User not found'], 404);
+            return response()->json(['message' => 'User not found'], 204);
         }
 
         return new UserResource($user);
-
     }
 
     // Update the specified resource in storage.
@@ -58,7 +59,7 @@ class UserController extends Controller
         $user = User::find($id);
 
         if (!$user) {
-            return response()->json(['message' => 'User not found'], 404);
+            return response()->json(['message' => 'User not found'], 204);
         }
 
         $fileds = $req->validate([
@@ -80,7 +81,6 @@ class UserController extends Controller
 
         $updated_user = new UserResource($user);
         return response(['message' => 'User updated successfully', "user" => $updated_user]);
-
     }
 
     //  Soft Delete the specified resource from storage.
@@ -89,7 +89,7 @@ class UserController extends Controller
         $user = User::find($id);
 
         if (!$user) {
-            return response()->json(['message' => 'User not found'], 404);
+            return response()->json(['message' => 'User not found'], 204);
         }
 
         $user->delete();
@@ -102,12 +102,11 @@ class UserController extends Controller
     {
         $user = User::onlyTrashed()->find($id);
         if (!$user) {
-            return response()->json(['message' => 'User not found'], 404);
+            return response()->json(['message' => 'User not found'], 204);
         }
 
         $user->restore();
         return response()->json(['message' => 'User restored successfully'], 201);
-
     }
 
     // Remove premently the specified resource from storage.
@@ -115,11 +114,10 @@ class UserController extends Controller
     {
         $user = User::onlyTrashed()->find($id);
         if (!$user) {
-            return response()->json(['message' => 'User not found'], 404);
+            return response()->json(['message' => 'User not found'], 204);
         };
 
         $user->forceDelete();
         return response()->json(['message' => 'User premently deleted successfully'], 201);
-
     }
 }

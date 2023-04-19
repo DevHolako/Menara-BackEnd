@@ -29,4 +29,8 @@ class User extends Authenticatable
         'role',
     ];
 
+    public function revokeTokens()
+    {
+        $this->tokens()->delete();
+    }
 }

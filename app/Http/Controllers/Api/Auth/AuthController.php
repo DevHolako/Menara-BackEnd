@@ -15,6 +15,7 @@ use Illuminate\Support\Str;
 class AuthController extends Controller
 {
 
+
     use Common;
     public function register(Request $req)
     {
@@ -22,8 +23,7 @@ class AuthController extends Controller
         if ($is_Created > 1) {
             return response(["message" => "Register method not allowed"], 401);
         };
-        CreateUser($req);
-        return response()->json(['message' => 'Owner created successfully', 'Owner' => new UserResource($user)], 201);
+        $this->CreateUser($req);
     }
 
     public function login(Request $req)
@@ -53,15 +53,14 @@ class AuthController extends Controller
             return response([
                 "user" => new UserResource($user),
                 "token" => $token,
-            ], 201);
+            ], 200);
         }
-
     }
 
     public function logout(Request $req)
     {
-        auth()->user()->tokens()->delete();
-        return response()->json(['message' => 'Logged out successfully'], 201);
+        $req->user()->revokeTokens();
+        return response()->json(['message' => 'Logged out successfully'], 200);
     }
 
     public function resetPassword(Request $req)
