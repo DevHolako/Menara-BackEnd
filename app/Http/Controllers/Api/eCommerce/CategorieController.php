@@ -20,7 +20,7 @@ class CategorieController extends Controller
     {
         $categories = Categorie::all();
         if (!$categories) {
-            return response()->json(["message" => "No Categories were found"], 404);
+            return response()->json(["message" => "No Categories were found"], 204);
         };
         return response()->json($categories);
     }
@@ -43,11 +43,10 @@ class CategorieController extends Controller
         $categorie = Categorie::find($id);
 
         if (!$categorie) {
-            return response()->json(['message' => 'Categorie not found'], 404);
+            return response()->json(['message' => 'Categorie not found'], 204);
         }
 
         return response()->json($categorie);
-
     }
 
     // Update the specified resource in storage.
@@ -56,7 +55,7 @@ class CategorieController extends Controller
         $categorie = Categorie::find($id);
 
         if (!$categorie) {
-            return response()->json(['message' => 'Categorie not found'], 404);
+            return response()->json(['message' => 'Categorie not found'], 204);
         }
 
         $fileds = $req->validate([
@@ -66,7 +65,6 @@ class CategorieController extends Controller
         $categorie->update($fileds);
 
         return response()->json(['message' => 'Categorie updated successfully', 'Categorie' => $categorie]);
-
     }
 
     //  Soft Delete the specified resource from storage.
@@ -75,7 +73,7 @@ class CategorieController extends Controller
         $categorie = Categorie::find($id);
 
         if (!$categorie) {
-            return response()->json(['message' => 'Categorie not found'], 404);
+            return response()->json(['message' => 'Categorie not found'], 204);
         }
 
         $categorie->delete();
@@ -88,12 +86,11 @@ class CategorieController extends Controller
     {
         $categorie = Categorie::onlyTrashed()->find($id);
         if (!$categorie) {
-            return response()->json(['message' => 'Categorie not found'], 404);
+            return response()->json(['message' => 'Categorie not found'], 204);
         }
 
         $categorie->restore();
         return response()->json(['message' => 'Categorie restored successfully'], 201);
-
     }
 
     // Remove premently the specified resource from storage.
@@ -101,12 +98,10 @@ class CategorieController extends Controller
     {
         $categorie = Categorie::onlyTrashed()->find($id);
         if (!$categorie) {
-            return response()->json(['message' => 'Categorie not found'], 404);
+            return response()->json(['message' => 'Categorie not found'], 204);
         };
 
         $categorie->forceDelete();
         return response()->json(['message' => 'Categorie premently deleted successfully'], 201);
-
     }
-
 }

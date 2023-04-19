@@ -52,11 +52,10 @@ class RoleController extends Controller
         $role = Role::find($id);
 
         if (!$role) {
-            return response(['message' => 'role not found'], 404);
+            return response(['message' => 'role not found'], 204);
         }
 
         return new RoleResource($role);
-
     }
 
     /**
@@ -66,7 +65,7 @@ class RoleController extends Controller
     {
         $role = Role::find($id);
         if (!$role) {
-            return response(['message' => 'Role not found'], 404);
+            return response(['message' => 'Role not found'], 204);
         }
 
         $fileds = $request->validate([
@@ -77,7 +76,6 @@ class RoleController extends Controller
         return $fileds;
         $role->update($fileds);
         return response(['message' => 'Role updated successfully', 'role' => new RoleResource($role)]);
-
     }
 
     /**
@@ -88,13 +86,12 @@ class RoleController extends Controller
         $role = Role::find($id);
 
         if (!$role) {
-            return response(['message' => 'role not found'], 404);
+            return response(['message' => 'role not found'], 204);
         }
 
         $role->delete();
 
         return response(['message' => 'role deleted successfully']);
-
     }
 
     public function GivePermission(Request $request, string $id)
@@ -102,7 +99,7 @@ class RoleController extends Controller
         $role = Role::find($id);
 
         if (!$role) {
-            return response(['message' => 'Role not found'], 404);
+            return response(['message' => 'Role not found'], 204);
         }
         $validated = $request->validate(['name' => 'string|required|exists:permissions,name']);
 
@@ -112,7 +109,6 @@ class RoleController extends Controller
 
         $role->givePermissionTo($validated['name']);
         return response(['message' => 'Permission has been granted'], 200);
-
     }
     public function RevokePermission(Request $request, string $id)
     {
@@ -122,7 +118,7 @@ class RoleController extends Controller
         $role = Role::find($id);
 
         if (!$role) {
-            return response(['message' => 'Role not found'], 404);
+            return response(['message' => 'Role not found'], 204);
         }
 
         if (!$role->hasPermissionTo($validated['name'])) {
@@ -130,6 +126,5 @@ class RoleController extends Controller
         }
         $role->revokePermissionTo($validated['name']);
         return response(['message' => 'Permission has been reovked'], 200);
-
     }
 }

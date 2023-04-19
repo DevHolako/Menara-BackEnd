@@ -21,7 +21,7 @@ class ArticleController extends Controller
     {
         $articles = Article::all();
         if (!$articles) {
-            return response()->json(["message" => "No articles were found"], 404);
+            return response()->json(["message" => "No articles were found"], 204);
         };
         return response()->json($articles);
     }
@@ -46,11 +46,10 @@ class ArticleController extends Controller
         $article = Article::find($id);
 
         if (!$article) {
-            return response()->json(['message' => 'article not found'], 404);
+            return response()->json(['message' => 'article not found'], 204);
         }
 
         return response()->json($article);
-
     }
 
     // Update the specified resource in storage.
@@ -59,7 +58,7 @@ class ArticleController extends Controller
         $article = Article::find($id);
 
         if (!$article) {
-            return response()->json(['message' => 'article not found'], 404);
+            return response()->json(['message' => 'article not found'], 204);
         }
 
         $fileds = $req->validate([
@@ -71,7 +70,6 @@ class ArticleController extends Controller
         $article->update($fileds);
 
         return response()->json(['message' => 'article updated successfully', 'article' => $article]);
-
     }
 
     //  Soft Delete the specified resource from storage.
@@ -80,7 +78,7 @@ class ArticleController extends Controller
         $article = Article::find($id);
 
         if (!$article) {
-            return response()->json(['message' => 'article not found'], 404);
+            return response()->json(['message' => 'article not found'], 204);
         }
 
         $article->delete();
@@ -93,12 +91,11 @@ class ArticleController extends Controller
     {
         $article = Article::onlyTrashed()->find($id);
         if (!$article) {
-            return response()->json(['message' => 'article not found'], 404);
+            return response()->json(['message' => 'article not found'], 204);
         }
 
         $article->restore();
         return response()->json(['message' => 'article restored successfully'], 201);
-
     }
 
     // Remove premently the specified resource from storage.
@@ -106,12 +103,10 @@ class ArticleController extends Controller
     {
         $article = Article::onlyTrashed()->find($id);
         if (!$article) {
-            return response()->json(['message' => 'article not found'], 404);
+            return response()->json(['message' => 'article not found'], 204);
         };
 
         $article->forceDelete();
         return response()->json(['message' => 'article premently deleted successfully'], 201);
-
     }
-
 }

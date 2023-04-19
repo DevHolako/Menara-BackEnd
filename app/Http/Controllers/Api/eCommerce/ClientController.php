@@ -21,8 +21,8 @@ class ClientController extends Controller
     public function index()
     {
         $clients = Client::all();
-        if (!$clients) {
-            return response()->json(["message" => "No clients were found"], 404);
+        if ($clients->isEmpty()) {
+            return response()->json(["message" => "No clients were found"], 204);
         };
         return response()->json($clients);
     }
@@ -49,11 +49,10 @@ class ClientController extends Controller
         $client = Client::find($id);
 
         if (!$client) {
-            return response()->json(['message' => 'client not found'], 404);
+            return response()->json(['message' => 'client not found'], 204);
         }
 
         return response()->json($client);
-
     }
 
     // Update the specified resource in storage.
@@ -62,7 +61,7 @@ class ClientController extends Controller
         $client = Client::find($id);
 
         if (!$client) {
-            return response()->json(['message' => 'client not found'], 404);
+            return response()->json(['message' => 'client not found'], 204);
         }
 
         $fileds = $req->validate([
@@ -77,7 +76,6 @@ class ClientController extends Controller
         $client->update($fileds);
 
         return response()->json(['message' => 'client updated successfully', 'client' => $client]);
-
     }
 
     //  Soft Delete the specified resource from storage.
@@ -86,7 +84,7 @@ class ClientController extends Controller
         $client = Client::find($id);
 
         if (!$client) {
-            return response()->json(['message' => 'client not found'], 404);
+            return response()->json(['message' => 'client not found'], 204);
         }
 
         $client->delete();
@@ -99,12 +97,11 @@ class ClientController extends Controller
     {
         $client = Client::onlyTrashed()->find($id);
         if (!$client) {
-            return response()->json(['message' => 'client not found'], 404);
+            return response()->json(['message' => 'client not found'], 204);
         }
 
         $client->restore();
         return response()->json(['message' => 'client restored successfully'], 201);
-
     }
 
     // Remove premently the specified resource from storage.
@@ -112,12 +109,10 @@ class ClientController extends Controller
     {
         $client = Client::onlyTrashed()->find($id);
         if (!$client) {
-            return response()->json(['message' => 'client not found'], 404);
+            return response()->json(['message' => 'client not found'], 204);
         };
 
         $client->forceDelete();
         return response()->json(['message' => 'client premently deleted successfully'], 201);
-
     }
-
 }
