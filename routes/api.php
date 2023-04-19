@@ -69,14 +69,9 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/devis/{devi}/restore', [DeviController::class, 'restore']);
     Route::delete('/devis/{devi}/force_delete', [DeviController::class, 'forceDelete']);
 
-    // Admin Routes
-    Route::middleware(['role:Owner|Admin'])->group(function () {
-        // roles and permes routes
-        Route::apiResource('/permissions', PermissionController::class);
-        Route::apiResource('/roles', RoleController::class);
-        Route::post('/roles/{role}/permissions', [RoleController::class, 'GivePermission']);
-        Route::delete('/roles/{role}/permissions', [RoleController::class, 'RevokePermission']);
-
-    });
-
+    // roles and permes routes
+    Route::apiResource('/permissions', PermissionController::class);
+    Route::apiResource('/roles', RoleController::class);
+    Route::post('/roles/{role}/permissions', [RoleController::class, 'GivePermission']);
+    Route::delete('/roles/{role}/permissions', [RoleController::class, 'RevokePermission']);
 });

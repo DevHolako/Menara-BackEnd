@@ -72,10 +72,11 @@ class RoleController extends Controller
             'name' => "sometimes|string|unique:roles,name," . $role->id,
             'perms' => 'sometimes|array',
         ]);
-
-        return $fileds;
         $role->update($fileds);
-        return response(['message' => 'Role updated successfully', 'role' => new RoleResource($role)]);
+        if (isset($fileds["perms"])) {
+            $role->syncPermissions($fileds['perms']);
+        }
+        return response(['message' => 'Role updated successfully', 'role' => new RoleResource($role)], 200);
     }
 
     /**
