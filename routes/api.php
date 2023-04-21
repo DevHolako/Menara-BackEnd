@@ -43,6 +43,7 @@ Route::get('reset-password/{token}', function ($token) {
 Route::group(['middleware' => ['auth:sanctum']], function () {
     // Auth-related routes
     Route::post("/logout", [AuthController::class, "logout"]);
+    Route::post('/password/update', [AuthController::class, "updatePassword"]);
 
     // User-related routes
     Route::apiResource('users', UserController::class);

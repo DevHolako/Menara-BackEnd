@@ -17,18 +17,18 @@ class AuthController extends Controller
 
 
     use Common;
-    public function register(Request $req)
+    public function register(Request $request)
     {
         $is_Created = User::count();
         if ($is_Created > 1) {
             return response(["message" => "Register method not allowed"], 401);
         };
-        $this->CreateUser($req);
+        $this->CreateUser($request);
     }
 
-    public function login(Request $req)
+    public function login(Request $request)
     {
-        $fileds = $req->validate([
+        $fileds = $request->validate([
             "login" => 'required',
             "password" => 'string|required',
         ]);
@@ -45,7 +45,7 @@ class AuthController extends Controller
         } else {
 
             $login_time = now();
-            $clientIP = $req->ip();
+            $clientIP = $request->ip();
 
             // Mail::to($user->email)->send(new MailNotfy($user->fullname, $login_time, $clientIP));
 
@@ -57,22 +57,22 @@ class AuthController extends Controller
         }
     }
 
-    public function logout(Request $req)
+    public function logout(Request $request)
     {
-        $req->user()->revokeTokens();
+        $request->user()->revokeTokens();
         return response()->json(['message' => 'Logged out successfully'], 200);
     }
 
-    public function resetPassword(Request $req)
+    public function resetPassword(Request $request)
     {
         // Validate the request data
-        $req->validate([
+        $request->validate([
             'email' => 'required|email',
         ]);
 
         // Send password reset email to the user
         $response = Password::broker()->sendResetLink(
-            $req->only('email')
+            $request->only('email')
         );
 
         if ($response == Password::RESET_LINK_SENT) {
@@ -110,5 +110,28 @@ class AuthController extends Controller
         } else {
             return response()->json(['message' => 'Unable to reset password.'], 400);
         }
+    }
+
+
+    public function updatePassword(Request $request)
+    {
+        $request->validate([
+            'currentPassword' => 'required',
+            'newPassword' => 'required|min:8',
+            'retypeNewPassword' => 'required|same:newPassword',
+        ]);
+
+        /** @var User $user */
+        $user = auth()->user();
+
+        if (!Hash::check($request->currentPassword, $user->password)) {
+            return response(['message' => 'Current password is incorrect.'], 401);
+        }
+
+        $user->update([
+            'password' => Hash::make($request->newPassword),
+        ]);
+
+        return response(['message' => 'Password updated successfully.'], 200);
     }
 }
